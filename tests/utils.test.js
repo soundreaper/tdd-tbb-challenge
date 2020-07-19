@@ -26,8 +26,20 @@ it("should say hello", function() {
 // This is called "Red-Green-Refactor"
 // ========================================================
 
+it("should return the area of a quadrilateral", function() {
+  const rectArea = utils.area(2, 4)
+  expect(rectArea).to.equal(8)
+})
 
+it("should return the perimeter of a quadrilateral", function() {
+  const rectPerim = utils.perimeter(2, 4)
+  expect(rectPerim).to.equal(12)
+})
 
+it("should return the area of a circle", function() {
+  const circleArea = utils.circleArea(3)
+  expect(circleArea).to.equal(28.274333882308138)
+})
 
 // ========================================================
 // Level 2 Challenges
@@ -50,13 +62,45 @@ it("Should create a new (object) Item with name and price", function() {
   expect(item).to.have.property("quantity", 1)
 })
 
-it("Should return an array containing all items in cart")
+it("Should return an array containing all items in cart", function() {
+  const item = utils.createItem("ice cream", 1)
+  utils.addItemToCart(item)
 
-it("Should add a new item to the shopping cart")
+  const item2 =  utils.createItem("hot dog", 50)
+  utils.addItemToCart(item2)
 
-it("Should return the number of items in the cart")
+  const items = utils.getShoppingCart();
+  expect(items[0]).to.have.property("name", "ice cream")
+  expect(items[1]).to.have.property("name", "hot dog")
+})
 
-it("Should remove items from cart")
+it("Should add a new item to the shopping cart", function() {
+  const item = utils.createItem("ice cream", 1)
+  utils.addItemToCart(item)
+
+  const items = utils.getShoppingCart();
+  expect(items[0]).to.have.property("name", "ice cream")
+})
+
+it("Should return the number of items in the cart", function() {
+  const item = utils.createItem("ice cream", 1)
+  utils.addItemToCart(item)
+
+  const item2 =  utils.createItem("hot dog", 50)
+  utils.addItemToCart(item2)
+
+  expect(utils.getNumItemsInCart()).to.equal(2);
+})
+
+it("Should remove items from cart", function() {
+  const item = utils.createItem("ice cream", 1)
+  utils.addItemToCart(item)
+
+  expect(utils.getNumItemsInCart()).to.equal(1);
+
+  utils.removeItemFromCart(item);
+  expect(utils.getNumItemsInCart()).to.equal(0);
+})
 
 // ========================================================
 // Stretch Challenges
